@@ -15,24 +15,29 @@ The **Password Strength Analyzer** is a Python-based tool designed to evaluate t
 
 ---
 
-## Getting Started
+## Downloads
 
 ### Prerequisites
 
-- Python 3.8 or higher. Download it from [Python.org](https://www.python.org).
+- *Terminal and GUI versions require Python 3.8 or higher. Download it from* [Python.org](https://www.python.org).
 
-### Installation
+A .py file on a terminal. - [**Terminal**](https://github.com/YMQSec/Projects/blob/6e48ab8e8ca94ebe97bd966bd565e97e7e0e1ba0/Password%20Strength%20Analyzer/password_strength.py)
 
-```bash
-# Clone this repository
-git clone https://github.com/YMQSec/Projects.git
+A GUI version of the .py file on a terminal. - [**GUI**](https://github.com/YMQSec/Projects/blob/6e48ab8e8ca94ebe97bd966bd565e97e7e0e1ba0/Password%20Strength%20Analyzer/gui_password_analyzer.py)
 
-# Navigate to the Password Strength Analyzer directory
-cd Projects/Password\ Strength\ Analyzer
+A standalone .exe version of the program. - [**Windows Executable**](https://www.dropbox.com/scl/fi/8ebgsehqwl0d8mg72myu8/Password-Strength-Analyzer.zip?rlkey=qrq6ngyhmkn1xwrc5524obxfr&st=9h29kj3k&dl=1)
 
-# Run the script
-python password_strength.py
-```
+---
+
+### Windows Installation
+
+1. **Download the latest version**:
+
+2. **Extract the downloaded ZIP file to a folder.**
+
+3. **Run .exe file.**
+
+---
 
 ## Usage
 ```bash
@@ -82,7 +87,7 @@ python password_strength.py
 The Password Strength Analyzer evaluates passwords based on the following criteria:
 
 #### Length:
-- Strong passwords are at least 12 characters long.
+- Strong passwords are at least 10 characters long.
 
 #### Character Diversity:
 - Checks for a mix of uppercase and lowercase letters.
@@ -106,19 +111,6 @@ def test_password_strength():
 # Run the test script:
 python test_password_strength.py
 ```
-## Future Enhancements
-
-#### Real-time Validation:
-  - Integrate the tool into a graphical user interface (GUI) or web application.
-
-#### Common Password Detection:
-  - Warn users if their password is commonly used or appears in leaked password databases.
-
-#### Localization:
-  - Provide feedback in multiple languages.
-
----
-
 ## Contributing
 
 Contributions are welcome! Please follow these steps to contribute:
@@ -137,6 +129,12 @@ Contributions are welcome! Please follow these steps to contribute:
   git push origin feature-branch-name
 ```
 5. **Open a Pull Request.**
+
+---
+### Key Changes:
+- Added a section on **downloading the latest version** of the project from Dropbox.
+- Updated the **Usage** section with the correct command to run the executable.
+- Corrected details regarding password length in the output examples (changed to 10 characters minimum for strong passwords).
 
 ---
 
