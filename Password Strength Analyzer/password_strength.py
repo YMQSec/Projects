@@ -1,18 +1,15 @@
 import os
-import requests  # We need the requests library to download the file
 import re
+import requests  # We need the requests library to download the file
 
 # Function to categorize feedback (green for good, orange for acceptable, red for bad)
 def categorize_feedback(level):
     if level == "good":
-        return "color: green;"
+        return "green"
     elif level == "acceptable":
-        return "color: orange;"
+        return "orange"
     else:
-        return "color: red;"
-
-# File URL for the common passwords file
-dropbox_file_url = 'https://www.dropbox.com/scl/fi/b58abyc3cb063br2fyxgn/common_passwords.txt?rlkey=bkbg0puqtkda3mtuu0d6zrx4p&st=65kf0nro&dl=1'
+        return "red"
 
 # Download the common password file from Dropbox
 def download_file(file_url, destination):
@@ -52,18 +49,18 @@ def check_password_strength(password, common_passwords):
 
     # Priority check: Is the password too common?
     if password.lower() in common_passwords:
-        feedback.append({"message": "Your password is too common. Avoid using it!", "style": categorize_feedback("bad")})
-        return {"strength": "Weak", "strength_style": categorize_feedback("bad"), "score": 0, "feedback": feedback}
+        feedback.append({"message": "Your password is too common. Avoid using it!", "style": "bad"})
+        return {"strength": "Weak", "strength_style": "red", "score": 0, "feedback": feedback}
 
-    # Password length check
-    if len(password) >= 12:
+    # Password length check (Updated to 10 instead of 12)
+    if len(password) >= 10:  # Updated to check for 10 characters
         score += 2
-        feedback.append({"message": "Password length is strong.", "style": categorize_feedback("good")})
-    elif 8 <= len(password) < 12:
+        feedback.append({"message": "Password length is strong.", "style": "good"})
+    elif 8 <= len(password) < 10:
         score += 1
-        feedback.append({"message": "Password length is acceptable but could be longer.", "style": categorize_feedback("acceptable")})
+        feedback.append({"message": "Password length is acceptable but could be longer.", "style": "acceptable"})
     else:
-        feedback.append({"message": "Password is too short. Use at least 12 characters.", "style": categorize_feedback("bad")})
+        feedback.append({"message": "Password is too short. Use at least 10 characters.", "style": "bad"})
 
     # Check for uppercase and lowercase letters
     has_upper = any(c.isupper() for c in password)
@@ -71,36 +68,36 @@ def check_password_strength(password, common_passwords):
 
     if has_upper and has_lower:
         score += 1
-        feedback.append({"message": "Includes both lowercase and uppercase letters.", "style": categorize_feedback("good")})
+        feedback.append({"message": "Includes both lowercase and uppercase letters.", "style": "good"})
     else:
         if not has_upper:
-            feedback.append({"message": "Add uppercase letters.", "style": categorize_feedback("bad")})
+            feedback.append({"message": "Add uppercase letters.", "style": "bad"})
         if not has_lower:
-            feedback.append({"message": "Add lowercase letters.", "style": categorize_feedback("bad")})
+            feedback.append({"message": "Add lowercase letters.", "style": "bad"})
 
     # Check for numbers
     if re.search(r'\d', password):
         score += 1
-        feedback.append({"message": "Includes numbers.", "style": categorize_feedback("good")})
+        feedback.append({"message": "Includes numbers.", "style": "good"})
     else:
-        feedback.append({"message": "Add some numbers.", "style": categorize_feedback("bad")})
+        feedback.append({"message": "Add some numbers.", "style": "bad"})
 
     # Check for special characters
     if re.search(r'[!@#$%^&*(),.?":{}|<>]', password):
         score += 1
-        feedback.append({"message": "Includes special characters.", "style": categorize_feedback("good")})
+        feedback.append({"message": "Includes special characters.", "style": "good"})
     else:
-        feedback.append({"message": "Add special characters for a stronger password.", "style": categorize_feedback("bad")})
+        feedback.append({"message": "Add special characters for a stronger password.", "style": "bad"})
 
     # Determine overall strength
     if score >= 5:
         strength = "Strong"
-        strength_style = categorize_feedback("good")
+        strength_style = "green"
     elif score >= 3:
         strength = "Medium"
-        strength_style = categorize_feedback("acceptable")
+        strength_style = "orange"
     else:
         strength = "Weak"
-        strength_style = categorize_feedback("bad")
+        strength_style = "red"
 
     return {"strength": strength, "strength_style": strength_style, "score": score, "feedback": feedback}
